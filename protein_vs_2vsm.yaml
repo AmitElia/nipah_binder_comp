@@ -1,0 +1,20 @@
+# Mini-protein binder vs Nipah G (2VSM), binding site set with label_asym_id residues
+# Run with: boltzgen run protein_vs_2vsm.yaml --output outputs/Boltz_runs/protein --protocol protein-anything --num_designs 100 --budget 10
+entities:
+  # Designed mini-protein binder (length sampled in range)
+  - protein:
+      id: D
+      sequence: 70..120
+
+  # Target: Nipah virus G glycoprotein (chain A)
+  - file:
+      # Path is relative to this YAML; change if your CIF/PDB lives elsewhere
+      path: inputs/2VSM.cif
+      include:
+        - chain:
+            id: A
+      # Specify the antigen residues the binder should engage (label_asym_id indexing)
+      binding_types:
+        - chain:
+            id: A
+            binding: 32,55,115,215,271,303,317,372,392
